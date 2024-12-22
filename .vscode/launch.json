@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "cppvsdbg",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/code.exe",
+            "preLaunchTask": "C/C++: g++.exe build active file",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ]
+}
