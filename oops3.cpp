@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
-
+//Already studied- Single Inheritance, Multiple Inheritance, Multilevel Inheritance, Hierarchical Inheritance
+//Hybrid Inheritance
 class A {
     public:
     void funcA(){

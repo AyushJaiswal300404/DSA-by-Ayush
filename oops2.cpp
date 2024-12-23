@@ -8,7 +8,8 @@ class Human{
         int age;
         int height;
         int weight;
-    
+    protected:
+        int salary;//can be used only inside class and inside child class
     public:
     int getAge(){
         return this->age;

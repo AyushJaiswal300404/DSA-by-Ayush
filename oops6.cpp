@@ -2,7 +2,7 @@
 #include<string>
 using namespace std;
 //PolyMorphism
-
+//compile time polymorphism or static polymorphism
 class A{
     public:
         void func(){
@@ -26,8 +26,8 @@ class B{
     }
 
     void operator+ (B obj){
-        int val1 = this->a;
-        int val2 = obj.a;
+        int val1 = this->a;//current object's 'a'
+        int val2 = obj.a;//parameter object's 'a'
         cout<<val2-val1<<endl;
     }
 
