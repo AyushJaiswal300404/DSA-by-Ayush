@@ -54,16 +54,6 @@ void reverse(Node* &head, Node* curr, Node* prev){
     curr->next=prev;
 }
 
-int getLength(Node* head){
-    int len=0;
-    while(head!=NULL){
-        len++;
-        head=head->next;
-
-}
-    return len;
-}
-
 Node* getMiddle(Node* head){
     if(head == NULL || head->next==NULL){
         return head;
