@@ -165,14 +165,28 @@ Node* getStartingNode(Node* head){
     return slow;
 }
 
+Node* removeLoop(Node* head){
+    if(head==NULL){
+        return NULL;
+    }
+    Node* start = getStartingNode(head);
+    Node* temp = start;
+    while(temp->next!= start){
+        temp=temp->next;
+    }
+    temp->next=NULL;
+    return head;
+}
+
 int main(){
     Node* node1 = new Node(1);
     Node* head = node1;
-    print(head);
+    Node* tail= node1;
+    //print(head);
     insertAtHead(head, 5);
     insertAtHead(head, 15);
     insertAtHead(head, 25);
-    print(head);
+    /*print(head);
     Node* curr = head;
     Node* prev = NULL;
     reverse(head, curr, prev);
@@ -184,5 +198,16 @@ int main(){
     //Node* node3 = new Node(1);
     Node* head3 = NULL;
     cout<<isCircularList(head3)<<endl;
+    */
+    print(head);
+    tail->next=head->next;
+    cout<<"head "<<head->data<<endl;
+    cout<<"tail "<<tail->data<<endl;
+    cout<<detectLoop(head)<<endl;
+    cout<<floydDetectLoop(head)->data<<endl;
+    cout<<getStartingNode(head)->data<<endl;
+    removeLoop(head);
+    cout<<detectLoop(head)<<endl;
+
     return 0;
 }
