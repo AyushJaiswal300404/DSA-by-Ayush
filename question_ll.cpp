@@ -136,9 +136,9 @@ bool detectLoop(Node* head){
     return false;
 }
 
-bool floytDetectLoop(Node* head){
+Node* floydDetectLoop(Node* head){
     if(head==NULL){
-        return false;
+        return NULL;
     }
     Node* slow=head;
     Node* fast=head;
@@ -146,10 +146,23 @@ bool floytDetectLoop(Node* head){
         slow=slow->next;
         fast=fast->next->next;
         if(slow==fast){
-            return true;
+            return slow;
         }
     }
-    return false;
+    return NULL;
+}
+
+Node* getStartingNode(Node* head){
+    if(head==NULL){
+        return NULL;
+    }
+    Node* intersection = floydDetectLoop(head);
+    Node* slow=head;
+    while(slow!=intersection){
+        slow=slow->next;
+        intersection=intersection->next;
+    }
+    return slow;
 }
 
 int main(){
