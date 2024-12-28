@@ -178,15 +178,67 @@ Node* removeLoop(Node* head){
     return head;
 }
 
+void insertAtTail(Node* &tail, Node* curr){
+    tail->next=curr;
+    tail=curr;
+}
+
+Node* sortList(Node* head){
+    if(head == NULL)
+        return NULL;
+    Node* zeroHead = new Node(-1);
+    Node* zeroTail=zeroHead;
+    Node* oneHead = new Node(-1);
+    Node* oneTail=oneHead;
+    Node* twoHead = new Node(-1);
+    Node* twoTail=twoHead;
+
+    Node* curr =head;
+    //create seperate list for 0,1 and 2
+    while(curr!=NULL){
+        int value=curr->data;
+        if(value==0){
+            insertAtTail(zeroTail,curr);
+        }
+        else if(value==1){
+            insertAtTail(oneTail,curr);
+        }
+        else{
+            insertAtTail(twoTail,curr);
+        }
+        curr=curr->next;
+    }
+    //connect all the lists
+    //1s list is not empty
+    if(oneHead->next=NULL){
+        zeroTail->next = oneHead->next;
+    }
+    //1s list is empty
+    else{
+        zeroTail->next = twoHead->next;
+    }
+    oneTail->next=twoHead->next;
+    twoTail->next=NULL;
+
+    //setup
+    head=zeroHead->next;
+    delete zeroHead;
+    delete oneHead;
+    delete twoHead;
+
+    return head;
+}
+
 int main(){
+    /*
     Node* node1 = new Node(1);
     Node* head = node1;
     Node* tail= node1;
     //print(head);
-    insertAtHead(head, 5);
-    insertAtHead(head, 15);
-    insertAtHead(head, 25);
-    /*print(head);
+    insertAtHead(head, 0);
+    insertAtHead(head, 2);
+    insertAtHead(head, 2);
+    print(head);
     Node* curr = head;
     Node* prev = NULL;
     reverse(head, curr, prev);
@@ -199,7 +251,7 @@ int main(){
     Node* head3 = NULL;
     cout<<isCircularList(head3)<<endl;
     */
-    print(head);
+    /*print(head);
     tail->next=head->next;
     cout<<"head "<<head->data<<endl;
     cout<<"tail "<<tail->data<<endl;
@@ -208,6 +260,26 @@ int main(){
     cout<<getStartingNode(head)->data<<endl;
     removeLoop(head);
     cout<<detectLoop(head)<<endl;
-
+    */
+    /*Node* node = new Node(1);
+    Node* head = node;
+    Node* tail = node;
+    
+    // Test data
+    insertAtTail(tail, new Node(1));
+    insertAtTail(tail, new Node(0));
+    insertAtTail(tail, new Node(2));
+    insertAtTail(tail, new Node(1));
+    insertAtTail(tail, new Node(2));
+    
+    cout << "Before sorting: ";
+    print(head);
+    
+    head = sortList(head);
+    
+    cout << "After sorting: ";
+    print(head);
+    
     return 0;
+    */
 }
