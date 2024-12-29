@@ -33,6 +33,19 @@ void insertAtHead(Node* &head, int d){
     head=temp;
 }
 
+void insertAtTail(Node* &head,Node* &tail, int d){
+    Node* temp= new Node(d);
+    if(head==NULL){
+        head= temp;
+        tail= temp;
+        return;
+    }else{
+        tail->next=temp;
+        tail= tail->next;
+
+    }  
+}
+
 void print(Node* &head){
     Node* temp = head;
     while(temp!= NULL){
@@ -95,8 +108,57 @@ bool isPalindrome(Node* head){
     return true;
 }
 
+Node* add(Node* first, Node* second){
+    Node* ansHead= NULL;
+    Node* ansTail= NULL;
+    int carry=0;
+    while(first!=NULL && second!=NULL){
+        int sum= first->data + second->data + carry;
+        int digit= sum%10;
+        Node* temp= new Node(digit);
+        //create node and add in answer linked list
+        insertAtTail(ansHead,ansTail, digit);
+        
+        carry= sum/10;
+        first=first->next;
+        second=second->next;
+    }
+    while(first!=NULL){
+            int sum= first->data + carry;
+            int digit= sum%10;
+            insertAtTail(ansHead,ansTail, digit);
+            carry= sum/10;
+            first=first->next;
+    }
+    while(second!=NULL){
+            int sum= second->data + carry;
+            int digit= sum%10;
+            insertAtTail(ansHead,ansTail, digit);
+            carry= sum/10;
+            second=second->next;
+    }
+    if(carry!=0){
+            insertAtTail(ansHead,ansTail, carry);
+    }
+
+    
+    return ansHead;
+}
+
+Node* addTwoLists(Node* first, Node* second){
+    //reverse both lists
+    first= reverse(first);
+    second= reverse(second);
+
+    //add two lists
+    Node* ans= add(first, second); 
+    //reverse the ans
+    ans=reverse(ans);
+    return ans;
+}
+
 int main(){
-    Node* head = NULL;
+    /*Node* head = NULL;
     insertAtHead(head, 1);
     insertAtHead(head, 2);
     insertAtHead(head, 3);
@@ -106,5 +168,21 @@ int main(){
     cout<<isPalindrome(head)<<endl;
     print(head);
     //delete head;
+    return 0;
+    */
+    Node* head1 = NULL;
+    insertAtHead(head1, 1);
+    insertAtHead(head1, 2);
+    insertAtHead(head1, 3);
+    insertAtHead(head1, 4);
+    print(head1);
+
+    Node* head2 = NULL;
+    insertAtHead(head2, 1);
+    insertAtHead(head2, 2);
+    print(head2);
+
+    Node* ans = addTwoLists(head1, head2);
+    print(ans);
     return 0;
 }
