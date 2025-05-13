@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "iostream": "cpp"
+        "*.ejs": "html",
+        "iostream": "cpp",
+        "vector": "cpp",
+        "map": "cpp",
+        "format": "cpp"
     }
 }
