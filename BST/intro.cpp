@@ -117,14 +117,15 @@ Node* minVal(Node* root){
 }
 
 Node* maxVal(Node* root){
-    Node* temp=root;
+    Node* temp = root;
     while(temp->right != NULL){
         temp = temp->right;
     }
+    return temp;
 }
 
 Node* deleteFromNode(Node* root, int val){
-    if(root->data==NULL){
+    if(root == NULL){
         return NULL;
     }
     if(root->data == val){
@@ -143,12 +144,21 @@ Node* deleteFromNode(Node* root, int val){
             return temp;
         }
         if(root->left != NULL && root->right != NULL){
-            int mini= minVal(root->right)->data;
-            root->data=mini;
-            root->right=deleteFromNode(root->right, mini);
+            int mini = minVal(root->right)->data;
+            root->data = mini;
+            root->right = deleteFromNode(root->right, mini);
             return root;
         }
     }
+    else if(val < root->data){
+        root->left = deleteFromNode(root->left, val);
+        return root;
+    }
+    else{
+        root->right = deleteFromNode(root->right, val);
+        return root;
+    }
+    return root;
 }
 
 int main(){
