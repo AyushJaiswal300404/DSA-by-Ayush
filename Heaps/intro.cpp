@@ -27,5 +27,43 @@ class heap{
         }
         cout<<endl;
     }
+
+    void deletefromHeap(){
+        if(size==0){
+            cout<<"Heap is empty"<<endl;
+            return;
+        }
+        arr[1] = arr[size];
+        size = size - 1;
+        int i=1;
+        while(i<size){
+            int leftIndex=2*i;
+            int rightIndex=2*i+1;
+
+            if(leftIndex <size && arr[i] < arr[leftIndex]){
+                swap(arr[i], arr[leftIndex]);
+                i = leftIndex;
+            } else if(rightIndex < size && arr[i] < arr[rightIndex]){
+                swap(arr[i], arr[rightIndex]);
+                i = rightIndex;
+            } else {
+                return;
+            }
+        }
+
+    }
 };
 
+int main(){
+    heap h;
+    h.size=0;
+    h.insert(10);
+    h.insert(20);
+    h.insert(30);
+    h.insert(40);
+    h.insert(50);
+    h.print();
+    h.deletefromHeap();
+    h.print();
+    return 0;
+}
